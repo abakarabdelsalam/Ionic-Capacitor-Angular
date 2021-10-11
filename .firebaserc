@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "users-test-784f5": {
+      "hosting": {
+        "app": [
+          "users-test-784f5"
+        ]
+      }
+    }
+  }
+}

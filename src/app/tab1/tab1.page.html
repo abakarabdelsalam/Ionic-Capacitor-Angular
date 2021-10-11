@@ -1,0 +1,67 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Ajout de User</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="ionicForm">
+
+		<ion-item lines="full">
+			<ion-label position="floating">Name</ion-label>
+			<ion-input formControlName="name" type="text"></ion-input>
+		</ion-item>
+		<span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+			Name is required.
+		</span>
+		<span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
+			Name should be min 2 chars long.
+		</span>
+
+		<ion-item lines="full">
+			<ion-label position="floating">Email</ion-label>
+			<ion-input formControlName="email" type="email"></ion-input>
+		</ion-item>
+		<span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+			Email is required.
+		</span>
+		<span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+			Please provide valid email id.
+		</span>
+
+		<ion-item lines="full">
+			<ion-label position="floating">Date</ion-label>
+			<ion-datetime display-format="YYYY MMMM DDD" formControlName="date"></ion-datetime>
+		</ion-item>
+
+		<ion-row>
+			<ion-col>
+				<ion-button (click)="submitForm()" color="danger" expand="block">Submit</ion-button>
+			</ion-col>
+		</ion-row>
+	</form>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<h1>Contactes enregistrer</h1>
+			</ion-col>
+		</ion-row>
+		<ion-list>
+
+			<ion-item-sliding *ngFor="let userItem of allUsers">
+				<ion-item>
+					<label>
+						<p>{{userItem.email}} </p>
+						<p>{{userItem.name}} </p>
+					</label>
+				</ion-item>
+				<ion-item-options side="end">
+					<ion-item-option (click)="Editer(userItem.id)">Editer</ion-item-option>
+					<ion-item-option color="danger" (click)="Supprimer(userItem.id)">Supprimer</ion-item-option>
+				</ion-item-options>
+			</ion-item-sliding>
+		</ion-list>
+
+	</ion-grid>
+</ion-content>
